@@ -1,4 +1,4 @@
-name: Deploy in beta
+name: Deploy 
 on: 
   push:
     branches:
