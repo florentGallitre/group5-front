@@ -1,0 +1,25 @@
+name: Deploy in beta
+on: 
+  push:
+    branches:
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executing remote ssh 2 commands using password
+        uses: appleboy/ssh-action@master
+        env:
+          CLONE_DIR: /home/john/front-grp5
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: 22
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: CLONE_DIR
+          script: |
+            echo "Hello world"
+            rm -rf $CLONE_DIR
+            git clone -b develop git@github.com:florentGallitre/group5-front.git /home/john/front-grp5
+            cd $CLONE_DIR
+            
